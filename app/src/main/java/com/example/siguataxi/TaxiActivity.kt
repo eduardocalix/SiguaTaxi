@@ -23,14 +23,19 @@ class TaxiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_taxi)
 
-        //listen to gallery button click
+        //al darle click a galeria
         galeria.setOnClickListener {
             pickPhotoFromGallery()
         }
 
-        //listen to take photo button click
+        //al darle click a tomar foto
         tomaFoto.setOnClickListener {
             askCameraPermission()
+        }
+        btnCuentaV.setOnClickListener{
+            val intent: Intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

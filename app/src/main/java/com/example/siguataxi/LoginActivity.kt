@@ -39,14 +39,32 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
+    private val usuario:String = "ecalix@gmail.com"
+    private val contraseña:String="abc"
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        var usuarioI:EditText = findViewById(R.id.etUsuario)
+        usuarioI.getText().toString()
+        var contraseña1:EditText=findViewById(R.id.etContraseña)
+        contraseña1.getText().toString()
 
-    tvRegistro.setOnClickListener {
-    val intent:Intent = Intent(this, RegistroActivity::class.java)
+
+
+    btnIniciar.setOnClickListener {
+        if(usuarioI.text.toString() == usuario && contraseña1.text.toString()==contraseña){
+    val intent:Intent = Intent(this, MapaTaxiActivity::class.java)
     startActivity(intent)
-    finish()
-    }
+    finish()}else{
+            Toast.makeText(this, R.string.contraseña_incorrecta, Toast.LENGTH_SHORT).show()
+        }}
+
+        tvRegistro.setOnClickListener {
+            val intent:Intent = Intent(this, RegistroActivity::class.java)
+            startActivity(intent)
+            finish()}
     }
 }

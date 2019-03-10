@@ -81,7 +81,7 @@
                 android:textStyle="bold"/>
 
         <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/etUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -95,7 +95,7 @@
                 android:textColorHint="@color/design_default_color_primary_dark"/>
 
         <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/etContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:layout_margin="15dp"
@@ -115,7 +115,7 @@
                 android:layout_margin="15dp"
                 android:background="@drawable/login_button"
                 android:text="@string/inicio"
-                android:textColor="#FFF"/>
+                android:textColor="#FFF" android:baselineAligned="false"/>
 
     </LinearLayout>
 

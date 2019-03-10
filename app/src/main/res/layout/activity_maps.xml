@@ -39,18 +39,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             <Button
-                    android:id="@+id/btnclr"
+                    android:id="@+id/btnLimpiar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="90dp"
-                    android:text="Limpiar"
+                    android:text="@string/limpiar"
             />
 
             <Button
-                    android:id="@+id/btnsubmit"
+                    android:id="@+id/btnEnviar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enviar" />
+                    android:text="@string/enviar"/>
         </LinearLayout>
 
     </fragment>

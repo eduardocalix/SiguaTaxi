@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">SiguaTaxi</string>
     <string name="titulo_inicio">Inicio de sesión</string>
-    <!-- Strings related to login -->
+    <!-- Strings relacionados con el login-->
     <string name="correo">Correo usuario</string>
     <string name="contraseña">Contraseña</string>
     <string name="registro">No tienes una cuenta? Inicia aquí</string>
-    <string name="inicio">Iniciar</string>
-    <string name="error_invalid_email">El correo electronico es invalido</string>
-    <string name="error_invalid_password">La contraseña es muy corta</string>
-    <string name="error_incorrect_password">La contraseña es incorrecta</string>
-    <string name="error_field_required">Este campo es requerido</string>
+    <string name="inicioA">Iniciar</string>
+    <string name="correo_invalido">El correo electronico es invalido</string>
+    <string name="contraseña_corta">La contraseña es muy corta</string>
+    <string name="contraseña_incorrecta">La contraseña es incorrecta</string>
+    <string name="campo_requerido">Este campo es requerido</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="registroA">Registro de usuario</string>
 
@@ -31,6 +31,27 @@
     <string name="galeria">Galeria</string>
     <string name="registro_foto">Foto conductor</string>
     <string name="foto">Foto</string>
+    <string name="title_activity_mapa_taxi">Map</string>
+    <string name="limpiar">Limpiar</string>
+    <string name="enviar">Enviar</string>
+
+    <string name="title_activity_menu">SiguaTaxi</string>
+    <string name="navigation_drawer_open">Abrir navegación</string>
+    <string name="navigation_drawer_close">Cerrar navegación</string>
+    <string name="nav_header_title">SiguaTaxi</string>
+    <string name="nav_header_subtitle">eduardocalix11xtra@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="quienes_somos">¿Quienes Somos?</string>
+    <string name="horarios">Horarios</string>
+    <string name="acerca">Acerca de</string>
+    <string name="inicio">Inicio</string>
+    <string name="pedir_taxi">Pedir Taxi</string>
+
+    <string name="nosotros">¿Quienes Somos?</string>
+    <string name="vision">Visión</string>
+    <string name="mision">Misión</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 
 
 </resources>

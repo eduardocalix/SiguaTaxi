@@ -28,7 +28,7 @@ class RegistroActivity : AppCompatActivity() {
             btncuenta.setOnClickListener {
                 val intent: Intent = Intent(this, TaxiActivity::class.java)
                 startActivity(intent)
-                finish()
+
             }
 
         }else{

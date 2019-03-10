@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_camera"
+                android:icon="@android:drawable/ic_menu_sort_by_size"
+                android:title="@string/inicio"/>
+        <item
+                android:id="@+id/nav_gallery"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/pedir_taxi"/>
+        <item
+                android:id="@+id/nav_slideshow"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Slideshow"/>
+        <item
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Tools"/>
+    </group>
+
+    <item android:title="@string/acerca">
+        <menu>
+            <item
+                    android:id="@+id/nav_share"
+                    android:icon="@android:drawable/ic_menu_my_calendar"
+                    android:title="@string/horarios"/>
+            <item
+                    android:id="@+id/nav_nosotros"
+                    android:icon="@android:drawable/ic_menu_info_details"
+                    android:title="@string/quienes_somos"/>
+        </menu>
+    </item>
+
+</menu>
