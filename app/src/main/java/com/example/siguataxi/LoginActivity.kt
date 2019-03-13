@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         //val password = editTextPassword.getText().toString().trim()
 
 
-        /*//checking if email and passwords are empty
+        /*//verifica si el correo y la contraseña estan vacias
         if (TextUtils.isEmpty(usuarioI.text)) {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show()
             return
@@ -60,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
             if (usuarioIngresado.text.toString() == usuarioEmail && contraseñauno.text.toString() == contraseña) {
                 val intent = Intent(this, MenuActivity::class.java)
                 startActivity(intent)
+                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, R.string.contraseña_incorrecta, Toast.LENGTH_SHORT).show()
             }
@@ -79,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
             .setCancelable(false)
             .setPositiveButton(
                 "Si"
-            ) { _, _ -> this@LoginActivity.finish() }
+            ) { _, _ -> this@LoginActivity.finishAffinity()}
             .setNegativeButton("No", null)
             .show()
     }
