@@ -5,27 +5,27 @@
 
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_camera"
+                android:id="@+id/nav_inicio"
                 android:icon="@android:drawable/ic_menu_sort_by_size"
                 android:title="@string/inicio"/>
         <item
-                android:id="@+id/nav_gallery"
+                android:id="@+id/nav_pedir"
                 android:icon="@android:drawable/ic_menu_call"
                 android:title="@string/pedir_taxi"/>
         <item
-                android:id="@+id/nav_slideshow"
+                android:id="@+id/nav_mostrar"
                 android:icon="@drawable/ic_menu_slideshow"
-                android:title="Slideshow"/>
+                android:title="@string/mostrar"/>
         <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Tools"/>
+                android:id="@+id/nav_cerrar"
+                android:icon="@android:drawable/ic_lock_power_off"
+                android:title="@string/cerrar"/>
     </group>
 
     <item android:title="@string/acerca">
         <menu>
             <item
-                    android:id="@+id/nav_share"
+                    android:id="@+id/nav_horarios"
                     android:icon="@android:drawable/ic_menu_my_calendar"
                     android:title="@string/horarios"/>
             <item

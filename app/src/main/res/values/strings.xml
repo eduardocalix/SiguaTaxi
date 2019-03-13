@@ -1,4 +1,5 @@
 <resources>
+    var Nombre :string ="SiguaTaxi"
     <string name="app_name">SiguaTaxi</string>
     <string name="titulo_inicio">Inicio de sesión</string>
     <!-- Strings relacionados con el login-->
@@ -12,6 +13,7 @@
     <string name="campo_requerido">Este campo es requerido</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="registroA">Registro de usuario</string>
+    <string name="google">Google</string>
 
     <string name="nombre">Nombre</string>
     <string name="confirmar_contraseña">Confirmar contraseña</string>
@@ -43,6 +45,8 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Configuraciones</string>
     <string name="quienes_somos">¿Quienes Somos?</string>
+    <string name="cerrar">Cerrar Sesión</string>
+    <string name="mostrar">Mostrar</string>
     <string name="horarios">Horarios</string>
     <string name="acerca">Acerca de</string>
     <string name="inicio">Inicio</string>
@@ -51,7 +55,18 @@
     <string name="nosotros">¿Quienes Somos?</string>
     <string name="vision">Visión</string>
     <string name="mision">Misión</string>
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-
+    <string name="vision_texto">Consolidarnos como la empresa líder en la prestación del servicio de SiguaTaxi en el
+        casco urbano de Siguatepeque así como la empresa líder en la ciudad ofreciendo los más altos índices de
+        seguridad poniendo un énfasis especial en la profesionalización de nuestro personal y un excelente sistema de
+        información.
+    </string>
+    <string name="mision_texto">"SiguaTaxi" garantiza una atención personalizada para nuestros clientes, mediante la
+        prestación de servicio de transporte de taxi contando con conductores confiables y responsables, comprometidos
+        en brindarle tranquilidad seguridad y confort en el transcurso de su servicio y de esta manera ofrecer las
+        mejores oportunidades de movilización en la ciudad de Siguatepeque.
+    </string>
+    <string name="nombreTaxista">Nombre</string>
+    <string name="telefonoTaxista">Telefono</string>
+    <string name="usuarioCreado">Usuario creado correctamente</string>
 
 </resources>

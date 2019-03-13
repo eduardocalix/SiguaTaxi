@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
+
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
                                              android:id="@+id/layout"
@@ -29,7 +29,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/registroA"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="40sp" android:paddingTop="10dp"/>
+                android:textSize="40sp"/>
         <EditText
                 android:id="@+id/etNombre"
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:drawablePadding="10dp"
                 android:hint="@string/nombre"
                 android:textColorHint="@color/design_default_color_primary_dark" android:inputType="textPersonName"
-                android:textColor="@color/design_default_color_primary_dark" android:autofillHints="" tools:targetApi="o"/>
+                android:textColor="@color/design_default_color_primary_dark" android:autofillHints=""/>
 
         <EditText
                 android:id="@+id/etCorreo"
@@ -52,7 +52,7 @@
                 android:inputType="textEmailAddress"
                 android:textColorHint="@color/design_default_color_primary_dark"
                 android:textColor="@color/design_default_color_primary_dark"
-                android:textColorLink="@color/design_default_color_primary_dark" android:autofillHints="" tools:targetApi="o"/>
+                android:textColorLink="@color/design_default_color_primary_dark" android:autofillHints=""/>
         <EditText
                 android:id="@+id/etContraseña"
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:hint="@string/contraseña"
                 android:inputType="textPassword"
                 android:textColorHint="@color/design_default_color_primary_dark"
-                android:textColor="@color/design_default_color_primary_dark" android:autofillHints="" tools:targetApi="o"/>
+                android:textColor="@color/design_default_color_primary_dark" android:autofillHints=""/>
 
         <EditText
                 android:id="@+id/etConfirmar"
@@ -75,7 +75,7 @@
                 android:hint="@string/confirmar_contraseña"
                 android:inputType="textPassword"
                 android:textColorHint="@color/design_default_color_primary_dark"
-                android:textColor="@color/design_default_color_primary_dark" android:importantForAutofill="no" tools:targetApi="o"/>
+                android:textColor="@color/design_default_color_primary_dark" android:importantForAutofill="no"/>
         <EditText
                 android:id="@+id/etTelefono"
                 android:layout_width="match_parent"
@@ -86,7 +86,7 @@
                 android:hint="@string/numero_telefono"
                 android:inputType="number|phone"
                 android:textColorHint="@color/design_default_color_primary_dark"
-                android:textColor="@color/design_default_color_primary_dark" android:autofillHints="" tools:targetApi="o"/>
+                android:textColor="@color/design_default_color_primary_dark" android:autofillHints=""/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

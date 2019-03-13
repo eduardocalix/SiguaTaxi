@@ -33,7 +33,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="344dp"
             android:background="#dd4b39"
-            android:text="Google"
+            android:text="@string/google"
             android:textColor="#ffffff"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +61,7 @@
             app:layout_constraintVertical_bias="0.0">
 
         <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvInicioLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -70,7 +70,7 @@
                 android:textColor="@color/design_default_color_primary_dark"/>
 
         <TextView
-                android:id="@+id/tvRegistro"
+                android:id="@+id/tvRegistro1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="14dp"
@@ -85,28 +85,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:drawableLeft="@drawable/person"
+                android:drawableStart="@drawable/person"
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/correo"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/design_default_color_primary_dark"/>
+                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no" tools:targetApi="o"/>
 
         <EditText
                 android:id="@+id/etContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:layout_margin="15dp"
-                android:drawableLeft="@drawable/lock"
+                android:drawableStart="@drawable/lock"
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/contraseña"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/design_default_color_primary_dark"/>
+                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no" tools:targetApi="o"/>
 
         <Button
                 android:id="@+id/btnIniciar"
