@@ -11,17 +11,25 @@
     <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="663dp"
+            android:layout_height="689dp"
             android:layout_centerVertical="true"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="24dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp">
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
 
 
+        <ProgressBar
+
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:indeterminate="true"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/progressBar2"/>
         <TextView
                 android:id="@+id/tvRegistro1"
                 android:layout_width="wrap_content"
@@ -29,64 +37,80 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/registroA"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="40sp" android:paddingTop="10dp"/>
+                android:textSize="36sp" android:paddingTop="10dp" android:layout_margin="10dp"/>
         <EditText
                 android:id="@+id/etNombre"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/person"
                 android:drawablePadding="10dp"
-                android:hint="@string/nombre"
+                android:hint="@string/nombres"
                 android:textColorHint="@color/design_default_color_primary_dark" android:inputType="textPersonName"
-                android:textColor="@color/design_default_color_primary_dark" android:autofillHints="" tools:targetApi="o"/>
+                android:textColor="@color/design_default_color_primary_dark" android:autofillHints=""
+                tools:targetApi="o"/>
 
+        <EditText
+                android:id="@+id/etApellidos"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:layout_margin="10dp"
+                android:drawableStart="@drawable/person"
+                android:drawablePadding="10dp"
+                android:hint="@string/apellidos"
+                android:textColorHint="@color/design_default_color_primary_dark" android:inputType="textPersonName"
+                android:textColor="@color/design_default_color_primary_dark" android:autofillHints=""
+                tools:targetApi="o"/>
         <EditText
                 android:id="@+id/etCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/ic_action_mail"
                 android:drawablePadding="10dp"
                 android:hint="@string/correo"
                 android:inputType="textEmailAddress"
                 android:textColorHint="@color/design_default_color_primary_dark"
                 android:textColor="@color/design_default_color_primary_dark"
-                android:textColorLink="@color/design_default_color_primary_dark" android:autofillHints="" tools:targetApi="o"/>
+                android:textColorLink="@color/design_default_color_primary_dark" android:autofillHints=""
+                tools:targetApi="o"/>
         <EditText
-                android:id="@+id/etContraseña"
+                android:id="@+id/etContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/ic_action_contrasena"
                 android:drawablePadding="10dp"
                 android:hint="@string/contraseña"
                 android:inputType="textPassword"
                 android:textColorHint="@color/design_default_color_primary_dark"
-                android:textColor="@color/design_default_color_primary_dark" android:autofillHints="" tools:targetApi="o"/>
+                android:textColor="@color/design_default_color_primary_dark" android:autofillHints=""
+                tools:targetApi="o"/>
 
         <EditText
                 android:id="@+id/etConfirmar"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/ic_action_contrasena"
                 android:drawablePadding="10dp"
                 android:hint="@string/confirmar_contraseña"
                 android:inputType="textPassword"
                 android:textColorHint="@color/design_default_color_primary_dark"
-                android:textColor="@color/design_default_color_primary_dark" android:importantForAutofill="no" tools:targetApi="o"/>
+                android:textColor="@color/design_default_color_primary_dark" android:importantForAutofill="no"
+                tools:targetApi="o"/>
         <EditText
                 android:id="@+id/etTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/ic_action_telefono"
                 android:drawablePadding="10dp"
                 android:hint="@string/numero_telefono"
                 android:inputType="number|phone"
                 android:textColorHint="@color/design_default_color_primary_dark"
-                android:textColor="@color/design_default_color_primary_dark" android:autofillHints="" tools:targetApi="o"/>
+                android:textColor="@color/design_default_color_primary_dark" android:autofillHints=""
+                tools:targetApi="o"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -109,12 +133,13 @@
                 android:id="@+id/tvLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:text="@string/registro_inicio"
                 android:textAlignment="center"
                 android:textColor="@color/design_default_color_primary_dark"
                 android:textSize="22sp"/>
         <Button
+                android:onClick="registro"
                 android:id="@+id/btncuenta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

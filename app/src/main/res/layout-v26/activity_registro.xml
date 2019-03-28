@@ -37,7 +37,7 @@
                 android:layout_margin="15dp"
                 android:drawableStart="@drawable/person"
                 android:drawablePadding="10dp"
-                android:hint="@string/nombre"
+                android:hint="@string/nombres"
                 android:textColorHint="@color/design_default_color_primary_dark" android:inputType="textPersonName"
                 android:textColor="@color/design_default_color_primary_dark" android:autofillHints=""/>
 
@@ -54,7 +54,7 @@
                 android:textColor="@color/design_default_color_primary_dark"
                 android:textColorLink="@color/design_default_color_primary_dark" android:autofillHints=""/>
         <EditText
-                android:id="@+id/etContraseña"
+                android:id="@+id/etContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
                 android:layout_margin="15dp"

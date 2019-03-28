@@ -18,12 +18,23 @@
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1" android:layout_marginTop="24dp"
-            android:contentDescription="@string/app_name"/>
+            tools:layout_constraintTop_creator="1"
+            android:contentDescription="@string/app_name" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <ProgressBar
+
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:indeterminate="true"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/progressBar3" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginBottom="731dp" app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
             android:id="@+id/google_btn"
@@ -32,7 +43,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="344dp"
-            android:background="#dd4b39"
+            android:background="@color/design_default_color_primary_dark"
             android:text="@string/google"
             android:textColor="#ffffff"
             android:textStyle="bold"
@@ -92,10 +103,11 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no" tools:targetApi="o"/>
+                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no"
+                tools:targetApi="o" android:textColor="@color/design_default_color_primary_dark"/>
 
         <EditText
-                android:id="@+id/etContraseña"
+                android:id="@+id/etContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:layout_margin="15dp"
@@ -103,10 +115,11 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/contraseña"
-                android:inputType="textPassword"
+                android:inputType="textVisiblePassword|textPassword"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no" tools:targetApi="o"/>
+                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no"
+                tools:targetApi="o" android:textColor="@color/design_default_color_primary_dark"/>
 
         <Button
                 android:id="@+id/btnIniciar"
