@@ -15,8 +15,8 @@
     <string name="registroA">Registro de usuario</string>
     <string name="google">Facebook</string>
 
-    <string name="nombres">Nombres</string>
-    <string name="apellidos">Apellidos</string>
+    <string name="nombres">Nombre Usuario</string>
+    <string name="apellidos">Tomar Foto</string>
     <string name="confirmar_contraseña">Confirmar contraseña</string>
     <string name="numero_telefono">Número de teléfono</string>
     <string name="registro_inicio">Ya tienes una cuenta? Inicia aquí</string>

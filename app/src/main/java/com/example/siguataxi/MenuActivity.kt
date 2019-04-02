@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
 
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.app_bar_menu.*
@@ -27,6 +28,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        verificarUsuario()
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
@@ -48,7 +50,14 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mFragmentTransaction = mFragmentManager.beginTransaction()
 
     }
-
+    private fun verificarUsuario(){
+        val idUsuario = FirebaseAuth.getInstance().uid
+        if (idUsuario == null){
+            val intent = Intent (this, RegistroActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+    }
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)

@@ -81,7 +81,7 @@
                 android:textColor="@color/design_default_color_primary_dark"/>
 
         <TextView
-                android:id="@+id/tvRegistro1"
+                android:id="@+id/tvRegistroLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="14dp"
@@ -107,7 +107,7 @@
                 tools:targetApi="o" android:textColor="@color/design_default_color_primary_dark"/>
 
         <EditText
-                android:id="@+id/etContrasena"
+                android:id="@+id/etContrasenaLogin"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:layout_margin="15dp"
@@ -115,7 +115,7 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/contraseña"
-                android:inputType="textVisiblePassword|textPassword"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="8dp"
                 android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no"

@@ -19,6 +19,7 @@ import android.widget.*
 
 import kotlinx.android.synthetic.main.activity_login.*
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_usuarios.*
 
 
 //import sun.security.jgss.GSSUtil.login
@@ -30,67 +31,87 @@ import android.widget.Toast
 
 class LoginActivity : AppCompatActivity() {
 //"gladysberenicejimenez@gmail.com"
-    private lateinit var etUsuario:EditText
-    private lateinit var etContrasena:EditText
+
     private lateinit var progressBar: ProgressBar
     private lateinit var auth:FirebaseAuth
 
 
-//    private val usuarioEmail:String = "eduardocalix11xtra@gmail.com"
-//    private val contraseña:String="abc"
-    //var mAuth: FirebaseAuth? = null
-    //private val RC_SIGN_IN = 2
-    //private var mGoogleApiClient: GoogleApiClient? = null
-   // var button: Button? = null
+    private val usuarioEmail:String = "eduardocalix11xtra@gmail.com"
+    private val contrasena:String="abc"
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        etUsuario = findViewById(R.id.etUsuario)
-        etContrasena =  findViewById(R.id.etContrasena)
-        progressBar=findViewById(R.id.progressBar3)
-        auth=FirebaseAuth.getInstance()
-        //val email = editTextEmail.getText().toString().trim()
-        //val password = editTextPassword.getText().toString().trim()
+        //Accion al hacer click en el boton Iniciar Sesión
+        btnIniciar.setOnClickListener {
+            val correo = etUsuario.text.toString()
+            val password = etContrasenaLogin.text.toString()
+
+            // Iniciando Login de usuario ya registrado
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(correo, password)
+                .addOnCompleteListener {
+                    if (!it.isSuccessful) return@addOnCompleteListener
+
+            val intent = Intent(this, MenuActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                    startActivity(intent)
+            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+        }}
+        /*
+               // Volver a pantalla de registro
+               lblVolverRegistro_login.setOnClickListener {
+                   finish()
+               }
 
 
-        /*//verifica si el correo y la contraseña estan vacias
-        if (TextUtils.isEmpty(usuarioI.text)) {
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show()
-            return
-        }
-*/
+               var usuarioingresado: EditText = findViewById(R.id.etUsuario)
+               usuarioingresado.text.toString()
+
+               var contrasenauno:EditText = findViewById( R.id.etContrasena)
+               contrasenauno.text.toString()
+               progressBar=findViewById(R.id.progressBar3)
+               auth=FirebaseAuth.getInstance()
+               val email = editTextEmail.getText().toString().trim()
+               val password = editTextPassword.getText().toString().trim()
+
+
+               //verifica si el correo y la contraseña estan vacias
+               if (TextUtils.isEmpty(usuarioI.text)) {
+                   Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show()
+                   return
+               }
+       */
         /*button = findViewById(R.id.google_btn);
         google_btn.setOnClickListener(View.OnClickListener (){
              fun onClick(view: View) {
             signIn()
-        }})*/
+        }})
 
         btnIniciar.setOnClickListener {
-//            if (usuarioIngresado.text.toString() == usuarioEmail && contraseñauno.text.toString() == contraseña) {
-//                val intent = Intent(this, MenuActivity::class.java)
-//                startActivity(intent)
-//                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-//            } else {
-//                Toast.makeText(this, R.string.contraseña_incorrecta, Toast.LENGTH_SHORT).show()
-//            }
-            UsuarioInicio()
-        }
+            if (usuarioingresado.text.toString() == usuarioEmail && contrasenauno.text.toString()== contrasena) {
+                val intent = Intent(this, MenuActivity::class.java)
+                startActivity(intent)
+                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, R.string.contraseña_incorrecta, Toast.LENGTH_SHORT).show()
+            }
 
-        tvRegistro1.setOnClickListener {
-            val intent = Intent(this, RegistroActivity::class.java)
+        }*/
+
+        tvRegistroLogin.setOnClickListener {
+            val intent = Intent(this, UsuariosActivity::class.java)
             startActivity(intent)
+            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+
 
         }
 
     }
 
-    fun olvideContraseña(view: View){
-
-    }
-    fun login(view: View){
-
-    }
+/*
     private fun UsuarioInicio(){
         val usuario:String=etUsuario.text.toString()
         val contrasena:String=etContrasena.text.toString()
@@ -109,13 +130,13 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
         }
-    }
+    }*/
 
-    private fun action(){
-        val intent = Intent(this, MenuActivity::class.java)
-        startActivity(intent)
-        Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-    }
+//    private fun action(){
+//        val intent = Intent(this, MenuActivity::class.java)
+//        startActivity(intent)
+//        Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+//    }
     override fun onBackPressed() {
 
         AlertDialog.Builder(this)
