@@ -34,8 +34,8 @@ class UsuariosActivity : AppCompatActivity() {
                 rbUsuario.isChecked=false
                 btncuenta.setText (R.string.siguiente)
                 btncuenta.setOnClickListener {
-                    val intent = Intent(this, TaxiActivity::class.java)
-                    startActivity(intent)
+                    crearRegistro(1)
+
                     // Toast.makeText(this, "Faltan campos por llenar", Toast.LENGTH_SHORT).show()
                 }
             }else{
@@ -52,7 +52,7 @@ class UsuariosActivity : AppCompatActivity() {
                 btncuenta.setText(R.string.crear_cuenta)
 
                 btncuenta.setOnClickListener {
-                    crearRegistro()
+                    crearRegistro(0)
 
                 }
             }
@@ -117,7 +117,7 @@ lateinit var idInsersion :String
     /**
      * Funcion para el registro de Usuario
      */
-    private fun crearRegistro(){
+    private fun crearRegistro( valor : Int){
         /**
          * Creacion de las variables para el inicio de registro
          */
@@ -138,7 +138,7 @@ lateinit var idInsersion :String
         Obteniendo los valores de las variables correo y password
         Creando registro de usuario
          */
-        Toast.makeText(this, "creando: $correo", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "creando: $correo", Toast.LENGTH_SHORT).show()
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(correo, password)
             /**
@@ -158,7 +158,10 @@ lateinit var idInsersion :String
                     /**
                      * Agregar imagen a Firebase
                      */
-                    cargarImagenAFireBase()
+
+                    cargarImagenAFireBase(valor)
+
+
                 }
             }
             /**
@@ -169,7 +172,7 @@ lateinit var idInsersion :String
             }
     }
 
-    private fun cargarImagenAFireBase(){
+    private fun cargarImagenAFireBase(valoruno: Int){
 
         if (ubicacionImagenSeleccionada == null ){
             return
@@ -184,7 +187,7 @@ lateinit var idInsersion :String
          * Agregando la imagen del usuario al almacenamiento creado en FireBase
          */
         val referenciaAlmacenamiento = FirebaseStorage.getInstance().getReference("/imagenesUsuario/$nombreArchivo")
-
+        if (valoruno==0){
         referenciaAlmacenamiento.putFile(ubicacionImagenSeleccionada!!)
             .addOnSuccessListener {
 
@@ -193,13 +196,25 @@ lateinit var idInsersion :String
                  */
                 referenciaAlmacenamiento.downloadUrl.addOnSuccessListener{
                     it.toString()
-                   //Toast.makeText(this, "La localizacionn de la imagen es: $it", Toast.LENGTH_LONG).show()
                     guardarUsuarioAFireBase(it.toString())
                 }
             }
             .addOnFailureListener{
 
+            }}else if(valoruno==1){referenciaAlmacenamiento.putFile(ubicacionImagenSeleccionada!!)
+            .addOnSuccessListener {
+
+                /**
+                 * Descarga de imagen de Storage Firebase
+                 */
+                referenciaAlmacenamiento.downloadUrl.addOnSuccessListener{
+                    it.toString()
+                    guardarUsuario(it.toString())
+                }
             }
+            .addOnFailureListener{
+
+            }}
     }
 
     /**
@@ -208,11 +223,9 @@ lateinit var idInsersion :String
     private fun guardarUsuarioAFireBase(imagenPerfil: String){
         val idUsuario = idInsersion.toString()
         //val idUsuario = FirebaseAuth.getInstance().uid ?: ""
-       // Toast.makeText(this, "Hoy si voy a insertar $idUsuario", Toast.LENGTH_LONG).show()
 
-        var referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$idUsuario")
+        val referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$idUsuario")
         val usuario = Usuario(idUsuario, etNombre.text.toString(),etTelefono.text.toString(), imagenPerfil)
-       // Toast.makeText(this, "Hoy si voy a insertar", Toast.LENGTH_LONG).show()
 
         referenciaBaseDatos.setValue(usuario)
             .addOnSuccessListener {
@@ -223,13 +236,23 @@ lateinit var idInsersion :String
             }
             .addOnFailureListener {
                 Toast.makeText(this, "falló  ${it.message}", Toast.LENGTH_SHORT).show()
-
-
             }
-
     }
 
     class Usuario(val idUsuario:String, val nombreUsuario: String, val telefono:String,val imagenPerfil: String)
+
+    private fun guardarUsuario(imagenPerfil: String){
+        val idUsuario = idInsersion
+        val nombre =etNombre.text.toString()
+        val telefono =etTelefono.text.toString()
+        //var datos:datosTaxista =datosTaxista(idUsuario, etNombre.text.toString(),etTelefono.text.toString(), imagenPerfil)
+        val intent = Intent(this, TaxiActivity::class.java)
+        intent.putExtra("id",idUsuario)
+        intent.putExtra("nombreU",nombre)
+        intent.putExtra("telefonoU",telefono)
+        intent.putExtra("imagenU",imagenPerfil)
+        startActivity(intent)
+    }
 
 
 }

@@ -25,6 +25,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".ChatActivity">
+        </activity>
+        <activity android:name=".MenuTaxiActivity">
+        </activity>
+        <activity android:name=".ContenedorMensajesActivity">
+        </activity>
         <activity android:name=".UsuariosActivity">
         </activity>
         <activity
