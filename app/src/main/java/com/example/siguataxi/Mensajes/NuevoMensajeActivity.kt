@@ -1,12 +1,12 @@
-package com.example.siguataxi
-
+package com.example.siguataxi.Mensajes
 
 import android.content.Intent
-import android.os.Bundle
-import android.provider.MediaStore
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
 import android.util.Log
+import com.example.siguataxi.ChatActivity
+import com.example.siguataxi.R
+import com.example.siguataxi.Forma.Usuario
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -15,69 +15,65 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-
+import kotlinx.android.synthetic.main.activity_nuevo_mensaje.*
+import kotlinx.android.synthetic.main.nuevo_mensaje_lista_usuario.view.*
 
 class NuevoMensajeActivity : AppCompatActivity() {
-
+    companion object {
+        val USER_kEY = "USER_KEY"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registro)
-
-
-        fetchUsers()
+        setContentView(R.layout.activity_nuevo_mensaje)
+        // Editando barra de titulo
+        supportActionBar?.title = "Seleccionar Usuario"
+        buscarUsuarios()
     }
-    }
-//    companion object {
-//        val USER_KEY = "USER_KEY"
-//    }
-
-    private fun fetchUsers() {
-        val ref = FirebaseDatabase.getInstance().getReference("/users")
+    /**
+     * Realizar busqueda de usuarios en la base de datos
+     */
+    private fun buscarUsuarios() {
+        val ref = FirebaseDatabase.getInstance().getReference("/infoUsuarios")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
-
             override fun onDataChange(p0: DataSnapshot) {
-                val adapter = GroupAdapter<ViewHolder>()
+                val adaptador = GroupAdapter<ViewHolder>()
 
-                p0.children.forEach {
-                    Log.d("NewMessage", it.toString())
-                    val user = it.getValue(User::class.java)
-                    if (user != null) {
-                        adapter.add(UserItem(user))
+                p0.children.forEach{
+                    //Log.d("NuevoMensaje", it.toString())
+                    val nombreUsuario = it.getValue(Usuario::class.java)
+                    if (nombreUsuario != null){
+                        adaptador.add(ItemsUsuarios(nombreUsuario))
                     }
                 }
 
-                adapter.setOnItemClickListener { item, view ->
+                adaptador.setOnItemClickListener { item, view ->
+                    val itemsUsuarios = item as ItemsUsuarios
 
-                    val userItem = item as UserItem
-
-                    val intent = Intent(view.context, ChatLogActivity::class.java)
-//          intent.putExtra(USER_KEY,  userItem.user.username)
-                    intent.putExtra(USER_KEY, userItem.user)
+                    val intent = Intent(view.context, ChatActivity::class.java)
+                    intent.putExtra(USER_kEY, itemsUsuarios.usuario)
                     startActivity(intent)
-
                     finish()
-
                 }
-
-                recyclerview_newmessage.adapter = adapter
+                rvNuevosMensajes.adapter = adaptador
             }
-
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) {}
         })
     }
 }
 
-class UserItem(val user: User): Item<ViewHolder>() {
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.username_textview_new_message.text = user.username
 
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.imageview_new_message)
+
+/**
+ * Cargar Recycler View con los usuarios
+ */
+class ItemsUsuarios(val usuario: Usuario): Item<ViewHolder>(){
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.tv_nuevo_mensaje_lista_usuario.text = usuario.nombreUsuario
+        Picasso.get().load(usuario.imagenPerfil).into(viewHolder.itemView.img_nuevo_mensaje)
     }
 
     override fun getLayout(): Int {
-        return R.layout.user_row_new_message
+        return R.layout.nuevo_mensaje_lista_usuario
     }
 }
-}
+

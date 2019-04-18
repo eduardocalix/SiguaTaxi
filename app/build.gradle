@@ -3,6 +3,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+androidExtensions {
+    experimental = true
+}
+
 
 android {
     compileSdkVersion 28
@@ -37,17 +41,22 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.karumi:dexter:5.0.0'
+    // Agregando dependecias de Firebase
     implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-auth:16.2.0'
+    // Agregando auteticaciones de Firebase
+    implementation 'com.google.firebase:firebase-auth:16.2.1'
+    // Agregando Cloud Base de Datos de Firebase
     implementation 'com.google.firebase:firebase-database:16.1.0'
+    // Agregando Cloud Storage de Firebase
     implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-ads:17.2.0'
     implementation 'com.xwray:groupie:2.1.0'
 
     implementation 'de.hdodenhof:circleimageview:3.0.0'
-
+// Implementacion de groupie para manejar listas
     implementation 'com.xwray:groupie:2.1.0'
+    // Implementacion de Picasso para manejar fotos de perfil de Usarios
     implementation 'com.squareup.picasso:picasso:2.71828'
 
 }

@@ -177,7 +177,6 @@ lateinit var idInsersion :String
         if (ubicacionImagenSeleccionada == null ){
             return
         }
-
         /**
          * Agregado un nombre de archivo con ID Unico para cada usuario
          */
@@ -190,7 +189,6 @@ lateinit var idInsersion :String
         if (valoruno==0){
         referenciaAlmacenamiento.putFile(ubicacionImagenSeleccionada!!)
             .addOnSuccessListener {
-
                 /**
                  * Descarga de imagen de Storage Firebase
                  */
@@ -225,11 +223,11 @@ lateinit var idInsersion :String
         //val idUsuario = FirebaseAuth.getInstance().uid ?: ""
 
         val referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$idUsuario")
-        val usuario = Usuario(idUsuario, etNombre.text.toString(),etTelefono.text.toString(), imagenPerfil)
+        val usuario = Usuario2(idUsuario, etNombre.text.toString(),etTelefono.text.toString(), imagenPerfil)
 
         referenciaBaseDatos.setValue(usuario)
             .addOnSuccessListener {
-                Toast.makeText(this, "Se ha guardado con exito el usuario en Storage", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this, "Se ha guardado con exito el usuario en Storage", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this,MenuActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
@@ -239,7 +237,7 @@ lateinit var idInsersion :String
             }
     }
 
-    class Usuario(val idUsuario:String, val nombreUsuario: String, val telefono:String,val imagenPerfil: String)
+    class Usuario2(val idUsuario:String, val nombreUsuario: String, val telefono:String,val imagenPerfil: String)
 
     private fun guardarUsuario(imagenPerfil: String){
         val idUsuario = idInsersion

@@ -7,104 +7,111 @@ import android.support.v7.widget.DividerItemDecoration
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.example.siguataxi.Forma.Usuario
+import com.example.siguataxi.Forma.MensajeChatClase
+import com.example.siguataxi.Mensajes.NuevoMensajeActivity
+import com.example.siguataxi.vistas.UltimosMensajesLista
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_contenedor_mensajes.*
+import kotlinx.android.synthetic.main.activity_menu_taxi.*
+import kotlinx.android.synthetic.main.nav_header_menu.*
+import kotlinx.android.synthetic.main.nuevo_mensaje_lista_usuario.view.*
 
 class MenuTaxiActivity : AppCompatActivity() {
+
+    companion object {
+        var usuarioActual: Usuario? = null
+        val TAG = "UltimosMensajes"
+    }
+
+    val adaptador = GroupAdapter<ViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_taxi)
-        recyclerview_ultimo_mensaje.adapter = adapter
-        recyclerview_ultimo_mensaje.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
-        // set item click listener on your adapter
-        adapter.setOnItemClickListener { item, view ->
-            //Log.d(TAG, "123")
-            val intent = Intent(this, ChatLogActivity::class.java)
+        rv_ultimos_mensajes1.adapter = adaptador
+        rv_ultimos_mensajes1.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
-            // we are missing the chat partner user
+        // Seleccionar item con el adaptador
+        adaptador.setOnItemClickListener { item, view ->
+            Log.d(TAG, "123")
+            val intent = Intent(this, ChatActivity::class.java)
 
-            val row = item as LatestMessageRow
-            intent.putExtra(NuevoMensajeActivity.USER_KEY, row.chatPartnerUser)
+
+            val lista = item as UltimosMensajesLista
+            intent.putExtra(NuevoMensajeActivity.USER_kEY, lista.chatAmigo)
             startActivity(intent)
         }
 
-//    setupDummyRows()
-        listenForLatestMessages()
-
-        fetchCurrentUser()
-
-        verifyUserIsLoggedIn()
+        listaUltimosMensajes()
+        buscarUsuario()
+        verificarInicioSesionUsuario()
+        actualizarMensajes()
     }
 
-    val latestMessagesMap = HashMap<String, ChatMessage>()
+    val mapaUltimosMensajes = HashMap<String, MensajeChatClase>()
 
-    private fun refreshRecyclerViewMessages() {
-        adapter.clear()
-        latestMessagesMap.values.forEach {
-            adapter.add(LatestMessageRow(it))
+    private fun actualizarMensajes() {
+        val adaptador = GroupAdapter<ViewHolder>()
+        adaptador.clear()
+        mapaUltimosMensajes.values.forEach {
+            adaptador.add(UltimosMensajesLista(it))
         }
     }
 
-    private fun listenForLatestMessages() {
-        val fromId = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId")
+    private fun listaUltimosMensajes() {
+        val deId = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/ultimos-mensajes/$deId")
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val chatMessage = p0.getValue(ChatMessage::class.java) ?: return
-                latestMessagesMap[p0.key!!] = chatMessage
-                refreshRecyclerViewMessages()
+                val mensajeChat = p0.getValue(MensajeChatClase::class.java) ?: return
+                mapaUltimosMensajes[p0.key!!] = mensajeChat
+                actualizarMensajes()
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                val chatMessage = p0.getValue(ChatMessage::class.java) ?: return
-                latestMessagesMap[p0.key!!] = chatMessage
-                refreshRecyclerViewMessages()
+                val chatMessage = p0.getValue(MensajeChatClase::class.java) ?: return
+                mapaUltimosMensajes[p0.key!!] = chatMessage
+                actualizarMensajes()
             }
 
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-
-            }
-            override fun onChildRemoved(p0: DataSnapshot) {
-
-            }
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
+            override fun onChildRemoved(p0: DataSnapshot) {}
+            override fun onCancelled(p0: DatabaseError) {}
         })
     }
 
-    val adapter = GroupAdapter<ViewHolder>()
-
-//  private fun setupDummyRows() {
-//
-//
-//    adapter.add(LatestMessageRow())
-//    adapter.add(LatestMessageRow())
-//    adapter.add(LatestMessageRow())
-//  }
-
-    private fun fetchCurrentUser() {
+    private fun buscarUsuario() {
         val uid = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$uid")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
-                currentUser = p0.getValue(Usuario::class.java)
-                Log.d("LatestMessages", "Current user ${currentUser?.profileImageUrl}")
+
+
+                    usuarioActual = p0.getValue(Usuario::class.java)
+                    val nombreUsuario = p0.getValue(Usuario::class.java)
+                    if (nombreUsuario != null) {
+
+                    Log.d("UltimosMensajes", "Usuario Actual ${usuarioActual?.imagenPerfil}")
+                        tvNombreUsuario.text = nombreUsuario.nombreUsuario
+                        tvCorreoMenu.text=nombreUsuario.telefono
+
+                    Picasso.get().load(nombreUsuario.imagenPerfil).into(imageView)
+
+                }
             }
 
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) {}
         })
     }
 
-    private fun verifyUserIsLoggedIn() {
+    private fun verificarInicioSesionUsuario() {
         val uid = FirebaseAuth.getInstance().uid
         if (uid == null) {
             val intent = Intent(this, UsuariosActivity::class.java)
@@ -115,11 +122,11 @@ class MenuTaxiActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.menu_new_message -> {
-                val intent = Intent(this, NuevoMensajeActivity::class.java)
-                startActivity(intent)
+            R.id.menu_nuevoMensaje -> {
+                //val intent = Intent(this, NuevoMensajeActivity::class.java)
+                startActivity(Intent(this, NuevoMensajeActivity::class.java))
             }
-            R.id.menu_sign_out -> {
+            R.id.menu_cerrarSesion -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, UsuariosActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -134,4 +141,5 @@ class MenuTaxiActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
 }
