@@ -30,13 +30,14 @@ class ContenedorMensajesActivity : AppCompatActivity() {
     companion object {
         var usuarioActual: Usuario? = null
         val TAG = "UltimosMensajesUsuarios"
+
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contenedor_mensajes)
-        val adaptador = GroupAdapter<ViewHolder>()
+
 
         recyclerview_ultimo_mensaje.adapter = adaptador
         recyclerview_ultimo_mensaje.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
@@ -44,8 +45,7 @@ class ContenedorMensajesActivity : AppCompatActivity() {
         // Seleccionar item con el adaptador
         adaptador.setOnItemClickListener { item, view ->
             Log.d(TAG, "123")
-            val intent = Intent(this, ChatActivity::class.java)
-
+            val intent = Intent(view.context, ChatActivity::class.java)
 
             val lista = item as UltimosMensajesLista
             intent.putExtra(NuevoMensajeActivity.USER_kEY, lista.chatAmigo)
@@ -55,13 +55,13 @@ class ContenedorMensajesActivity : AppCompatActivity() {
         listaUltimosMensajes()
         buscarUsuario()
         verificarInicioSesionUsuario()
-        actualizarMensajes()
+
     }
+    val adaptador = GroupAdapter<ViewHolder>()
 
     val mapaUltimosMensajes = HashMap<String, MensajeChatClase>()
 
     private fun actualizarMensajes() {
-        val adaptador = GroupAdapter<ViewHolder>()
         adaptador.clear()
         mapaUltimosMensajes.values.forEach {
             adaptador.add(UltimosMensajesLista(it))
@@ -79,8 +79,8 @@ class ContenedorMensajesActivity : AppCompatActivity() {
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                val chatMessage = p0.getValue(MensajeChatClase::class.java) ?: return
-                mapaUltimosMensajes[p0.key!!] = chatMessage
+                val mensajesChat = p0.getValue(MensajeChatClase::class.java) ?: return
+                mapaUltimosMensajes[p0.key!!] = mensajesChat
                 actualizarMensajes()
             }
 
@@ -97,8 +97,6 @@ class ContenedorMensajesActivity : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 usuarioActual = p0.getValue(Usuario::class.java)
                 Log.d("UltimosMensajes", "Usuario Actual ${usuarioActual?.imagenPerfil}")
-
-
             }
 
             override fun onCancelled(p0: DatabaseError) {}

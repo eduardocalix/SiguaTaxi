@@ -103,10 +103,4 @@ class TaxiActivity : AppCompatActivity() {
 
     class Taxi(val idUsuario:String, val nombreUsuario: String, val correo:String,val telefono:String,val tipo:Int,val imagenPerfil: String,val marca:String,val modelo:String,val numeroPlaca:String,val numeroTaxi:String,val rating:Float)
 
-
-    //Funcion que nos permite salir del activity si
-
-    /*// Agregar un nuevo platillo (repetido)
-    platillos.add(Platillo("Platillo 11", 300.00, 4.0, R.drawable.platillo01))
-    adapter.notifyDataSetChanged()*/
 }

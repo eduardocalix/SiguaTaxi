@@ -22,10 +22,12 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.actualizar_puntuacion.*
+import kotlinx.android.synthetic.main.actualizar_puntuacion.view.*
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.Calendar.getInstance
@@ -54,7 +56,7 @@ class ChatActivity : AppCompatActivity() {
         rvRegistroChat.adapter = adaptador
         paraUsuario = intent.getParcelableExtra<Usuario>(NuevoMensajeActivity.USER_kEY)
         supportActionBar?.title = paraUsuario?.nombreUsuario
-
+        tvUser.text = paraUsuario?.nombreUsuario
         listaMensajes()
         btnCalificar.setOnClickListener {
             MostrarActualizar()
@@ -154,7 +156,11 @@ class ChatActivity : AppCompatActivity() {
         val mostrar= AlertDialog.Builder(this)
         val inflater = LayoutInflater.from(this)
         val view=inflater.inflate(R.layout.actualizar_puntuacion,null)
-        tvUsuarioActualizar?.text= usuario.nombreUsuario
+        view.tvUsuarioActualizar?.text= usuario?.nombreUsuario
+
+        view.rbPuntuacionActualizar?.rating=usuario.rating.toFloat()
+
+        Picasso.get()?.load(usuario?.imagenPerfil)?.into(view.img_actualizar)
         var puntuacion=view.findViewById<RatingBar>(R.id.rbPuntuacionActualizar)
         mostrar.setView(view)
         mostrar.setPositiveButton( "Actualizar"){p0,p1->

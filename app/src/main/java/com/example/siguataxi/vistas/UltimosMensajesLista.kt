@@ -1,7 +1,5 @@
 package com.example.siguataxi.vistas
 
-
-import android.content.Context
 import com.example.siguataxi.Forma.MensajeChatClase
 import com.example.siguataxi.R
 import com.example.siguataxi.Forma.Usuario
@@ -14,8 +12,6 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.ultimos_mensajes_lista.view.*
-import java.security.AccessControlContext
-
 
 class UltimosMensajesLista( val mensajesChat: MensajeChatClase): Item<ViewHolder>() {
   var chatAmigo: Usuario? = null
@@ -36,6 +32,7 @@ class UltimosMensajesLista( val mensajesChat: MensajeChatClase): Item<ViewHolder
     ref.addListenerForSingleValueEvent(object: ValueEventListener {
       override fun onDataChange(p0: DataSnapshot) {
         chatAmigo = p0.getValue(Usuario::class.java)
+
         viewHolder.itemView.usuario_textview_ultimos_mensajes.text = chatAmigo?.nombreUsuario
 
         val targetImageView = viewHolder.itemView.img_ultimos_mensajes

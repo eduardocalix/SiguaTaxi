@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_nuevo_mensaje.*
 import kotlinx.android.synthetic.main.nuevo_mensaje_lista_usuario.*
 import kotlinx.android.synthetic.main.nuevo_mensaje_lista_usuario.view.*
 
-class NuevoMensajeActivity() : AppCompatActivity() {
+class NuevoMensajeActivity : AppCompatActivity() {
     companion object {
         val USER_kEY = "USER_KEY"
     }
