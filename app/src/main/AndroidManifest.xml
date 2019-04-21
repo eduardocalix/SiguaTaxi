@@ -25,8 +25,41 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".HorariosActivity"
+        <activity android:name=".Mensajes.ChatTaxiActivity">
+        </activity>
+        <activity android:name=".BienvenidosActivity">
+        </activity>
+        <activity android:name=".Mensajes.NuevoMensajeActivity"
                   android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".ContenedorMensajesActivity">
+
+            </meta-data>
+
+        </activity>
+        <activity android:name=".ChatActivity"
+                  android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".MenuTaxiActivity"
+                  android:label="@string/title_activity_menu"
+                  android:parentActivityName=".MenuTaxiActivity"
+                  android:theme="@style/Base.TextAppearance.AppCompat.Menu"
+                    android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ContenedorMensajesActivity"
+                  android:screenOrientation="portrait">
+
+
+        </activity>
+        <activity android:name=".UsuariosActivity"
+                  android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+                android:name=".HorariosActivity"
+                android:screenOrientation="portrait">
         </activity>
 
         <meta-data
@@ -37,8 +70,8 @@
                 android:name=".MenuActivity"
                 android:label="@string/title_activity_menu"
                 android:parentActivityName=".MapaTaxiActivity"
-                android:theme="@style/NoActionBar"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.example.siguataxi.MapaTaxiActivity"/>
@@ -70,10 +103,6 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".RegistroActivity"
-                android:screenOrientation="portrait">
-        </activity>
-        <activity
                 android:name=".MapsActivity"
                 android:screenOrientation="portrait">
         </activity>
@@ -81,14 +110,15 @@
                 android:name=".LoginActivity"
                 android:label="@string/titulo_inicio"
                 android:screenOrientation="portrait">
+
         </activity>
         <activity
                 android:name=".MainActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
+
             </intent-filter>
         </activity>
     </application>

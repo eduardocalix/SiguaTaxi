@@ -3,7 +3,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'com.google.gms.google-services'
+androidExtensions {
+    experimental = true
+}
+
 
 android {
     compileSdkVersion 28
@@ -24,9 +27,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    //implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     testImplementation 'junit:junit:4.12'
@@ -37,9 +41,23 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.karumi:dexter:5.0.0'
-    implementation 'com.google.firebase:firebase-auth:16.1.0'
+    // Agregando dependecias de Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    // Agregando auteticaciones de Firebase
+    implementation 'com.google.firebase:firebase-auth:16.2.1'
+    // Agregando Cloud Base de Datos de Firebase
     implementation 'com.google.firebase:firebase-database:16.1.0'
+    // Agregando Cloud Storage de Firebase
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
-    implementation 'com.google.android.gms:play-services-ads:17.1.1'
+    implementation 'com.google.android.gms:play-services-ads:17.2.0'
+    implementation 'com.xwray:groupie:2.1.0'
+
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+// Implementacion de groupie para manejar listas
+    implementation 'com.xwray:groupie:2.1.0'
+    // Implementacion de Picasso para manejar fotos de perfil de Usarios
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
+apply plugin: 'com.google.gms.google-services'

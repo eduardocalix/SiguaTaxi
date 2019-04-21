@@ -13,9 +13,11 @@
     <string name="campo_requerido">Este campo es requerido</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="registroA">Registro de usuario</string>
-    <string name="google">Google</string>
-
-    <string name="nombre">Nombre</string>
+    <string name="google">Facebook</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="ultimos">Ultimos mensajes..</string>
+    <string name="nombres">Nombre Usuario</string>
+    <string name="apellidos">Tomar Foto</string>
     <string name="confirmar_contraseña">Confirmar contraseña</string>
     <string name="numero_telefono">Número de teléfono</string>
     <string name="registro_inicio">Ya tienes una cuenta? Inicia aquí</string>
@@ -68,5 +70,8 @@
     <string name="nombreTaxista">Nombre</string>
     <string name="telefonoTaxista">Telefono</string>
     <string name="usuarioCreado">Usuario creado correctamente</string>
+    <string name="nuevo_mensaje">Nuevo Mensaje</string>
+    <string name="escribir">Escribir un mensaje..</string>
+  <string name="calificar">Calificar Usuario</string>
 
 </resources>

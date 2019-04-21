@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_actualizar"
+            android:layout_width="100dp"
+            android:layout_height="107dp"
+            app:civ_border_color="@color/colorPrimaryDark"
+            android:layout_marginStart="16dp"
+            app:civ_border_width="2dp"
+            android:layout_marginTop="8dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombres"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:id="@+id/tvUsuarioActualizar" android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"/>
+    <RatingBar
+            android:layout_width="243dp"
+            android:layout_height="59dp" android:id="@+id/rbPuntuacionActualizar"
+            android:rating="2"
+            android:stepSize="0.5"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp" android:numStars="5"
+            android:visibility="visible"
+            android:theme="@style/RatingBar.Yellow"
+            android:layout_marginTop="8dp"
+    />
+</LinearLayout>

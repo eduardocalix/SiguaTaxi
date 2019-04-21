@@ -14,11 +14,22 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import com.example.siguataxi.Forma.Usuario
+import com.example.siguataxi.Mensajes.NuevoMensajeActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.app_bar_menu.*
+import kotlinx.android.synthetic.main.nav_header_menu.*
 
 
 class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +38,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        verificarUsuario()
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
@@ -47,6 +59,40 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mFragmentManager = supportFragmentManager
         mFragmentTransaction = mFragmentManager.beginTransaction()
 
+    }
+    private fun verificarUsuario(){
+        val idUsuario = FirebaseAuth.getInstance().uid
+        if (idUsuario == null){
+            val intent = Intent (this, UsuariosActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }else{buscarUsuario()}
+    }
+    private val tipo=0
+
+    private fun buscarUsuario() {
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$uid")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+
+                //MenuTaxiActivity.usuarioActual = p0.getValue(Usuario::class.java)
+                val nombreUsuario = p0.getValue(Usuario::class.java)
+                if (nombreUsuario != null) {
+
+                  //  Log.d("UltimosMensajes", "Usuario Actual ${MenuTaxiActivity.usuarioActual?.imagenPerfil}")
+                    tvNombreUsuario.text = nombreUsuario.nombreUsuario
+                    tvCorreoMenu.text=nombreUsuario.correo
+                    tipo== nombreUsuario.tipo
+                    Picasso.get().load(nombreUsuario.imagenPerfil).into(imageView)
+
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {}
+        })
     }
 
     override fun onBackPressed() {
@@ -87,15 +133,17 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //                ft.replace(R.id.MapaPrincipal, MapaTaxiActivity()).commit()
             }
             R.id.nav_pedir -> {
-                val intent = Intent(this, datosActivity::class.java)
+                val intent = Intent(this, NuevoMensajeActivity::class.java)
                 startActivity(intent)
-                this.onPause()
+
 
             }
             R.id.nav_mostrar -> {
-
+                val intent = Intent(this, ContenedorMensajesActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_cerrar -> {
+                FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()

@@ -44,7 +44,7 @@
                     android:layout_marginTop="16dp" android:textColor="@color/colorPrimary"/>
             <RatingBar
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/rbPuntuacion" android:layout_weight="0"
+                    android:layout_height="0dp" android:id="@+id/rbPuntuacion1" android:layout_weight="0"
                     android:numStars="5" android:rating="3.5"
                     android:layout_margin="10dp" android:stepSize="5" android:minWidth="20dp" android:minHeight="20dp"
                     android:isIndicator="false"/>
