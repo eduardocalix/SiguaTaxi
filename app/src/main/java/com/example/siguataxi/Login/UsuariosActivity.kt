@@ -132,6 +132,11 @@ lateinit var idInsersion :String
             Toast.makeText(this, "No se pueden dejar datos en blanco", Toast.LENGTH_LONG).show()
             return
         }
+        if( password.length>6){
+            Toast.makeText(this, "Contraseña muy corta, tiene que tener mas de 6 caracteres", Toast.LENGTH_LONG).show()
+            return
+        }
+
         /**
          *  Implementacion de Firebase
         Creando una instancia de auteticacion con el correo y la contraseña
@@ -186,7 +191,7 @@ lateinit var idInsersion :String
          * Agregando la imagen del usuario al almacenamiento creado en FireBase
          */
         val referenciaAlmacenamiento = FirebaseStorage.getInstance().getReference("/imagenesUsuario/$nombreArchivo")
-        if (valoruno==0){
+
         referenciaAlmacenamiento.putFile(ubicacionImagenSeleccionada!!)
             .addOnSuccessListener {
                 /**
@@ -194,62 +199,64 @@ lateinit var idInsersion :String
                  */
                 referenciaAlmacenamiento.downloadUrl.addOnSuccessListener{
                     it.toString()
-                    guardarUsuarioAFireBase(it.toString())
+                    guardarUsuarioAFireBase(it.toString(),valoruno)
+
                 }
             }
             .addOnFailureListener{
 
-            }}else if(valoruno==1){referenciaAlmacenamiento.putFile(ubicacionImagenSeleccionada!!)
-            .addOnSuccessListener {
-
-                /**
-                 * Descarga de imagen de Storage Firebase
-                 */
-                referenciaAlmacenamiento.downloadUrl.addOnSuccessListener{
-                    it.toString()
-                    guardarUsuario(it.toString())
-                }
             }
-            .addOnFailureListener{
-
-            }}
     }
 
     /**
      * Guardar todos los datos de usuario en la Base de Datos de Firebase
      */
-    private fun guardarUsuarioAFireBase(imagenPerfil: String){
+    private fun guardarUsuarioAFireBase(imagenPerfil: String,valoruno: Int){
+        val ratingBar=3.5
+
         val idUsuario = idInsersion.toString()
         //val idUsuario = FirebaseAuth.getInstance().uid ?: ""
+        if (valoruno==1){
+           //Toast.makeText(this, "Entró a la parte taxista", Toast.LENGTH_SHORT).show()
 
+            guardarTaxista(imagenPerfil,valoruno)
+        }else{
         val referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$idUsuario")
-        val usuario = Usuario2(idUsuario, etNombre.text.toString(),etTelefono.text.toString(), imagenPerfil)
+        val usuario = Usuario2(idUsuario, etNombre.text.toString(),etCorreo.text.toString(),etTelefono.text.toString(),valoruno ,imagenPerfil,"","","","",ratingBar.toFloat())
 
         referenciaBaseDatos.setValue(usuario)
             .addOnSuccessListener {
                // Toast.makeText(this, "Se ha guardado con exito el usuario en Storage", Toast.LENGTH_SHORT).show()
+
                 val intent = Intent(this,MenuActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
+                startActivity(intent)}
+
             .addOnFailureListener {
                 Toast.makeText(this, "falló  ${it.message}", Toast.LENGTH_SHORT).show()
-            }
+            }}
     }
 
-    class Usuario2(val idUsuario:String, val nombreUsuario: String, val telefono:String,val imagenPerfil: String)
-
-    private fun guardarUsuario(imagenPerfil: String){
-        val idUsuario = idInsersion
+    class Usuario2(val idUsuario:String, val nombreUsuario: String, val correo:String,val telefono:String,val tipo:Int,val imagenPerfil: String,val marca:String,val modelo:String,val numeroPlaca:String,val numeroTaxi:String,val rating:Float)
+/**
+*Pasa el id despues de guardar el usuario para guardar los datos del vehiculo si es taxista
+ */
+    private fun guardarTaxista(imagenPerfil: String,valoruno: Int){
+        val idUsuarioTaxi = idInsersion
         val nombre =etNombre.text.toString()
         val telefono =etTelefono.text.toString()
-        //var datos:datosTaxista =datosTaxista(idUsuario, etNombre.text.toString(),etTelefono.text.toString(), imagenPerfil)
+        val correo= etCorreo.text.toString()
+        val tipo:String=valoruno.toString()
+
         val intent = Intent(this, TaxiActivity::class.java)
-        intent.putExtra("id",idUsuario)
+        intent.putExtra("id",idUsuarioTaxi)
         intent.putExtra("nombreU",nombre)
         intent.putExtra("telefonoU",telefono)
         intent.putExtra("imagenU",imagenPerfil)
+        intent.putExtra("correoUs",correo)
+        intent.putExtra("tipoU",tipo)
         startActivity(intent)
+    finish()
     }
 
 

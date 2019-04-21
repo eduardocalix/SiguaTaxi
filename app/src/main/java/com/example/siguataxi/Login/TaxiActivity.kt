@@ -15,6 +15,7 @@ import android.widget.Toast
 import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_taxi.*
+import kotlinx.android.synthetic.main.activity_usuarios.*
 
 
 class TaxiActivity : AppCompatActivity() {
@@ -30,8 +31,8 @@ class TaxiActivity : AppCompatActivity() {
         nombreUsuario = objetoIntent.getStringExtra("nombreU")
         telefono = objetoIntent.getStringExtra("telefonoU")
         direccionImagen = objetoIntent.getStringExtra("imagenU")
-
-
+        correoUsuario=objetoIntent.getStringExtra("correoUs")
+        tipo=objetoIntent.getStringExtra("tipoU")
         btnCuentaV.setOnClickListener{
             crearRegistroAuto()}
     }
@@ -39,6 +40,9 @@ class TaxiActivity : AppCompatActivity() {
     lateinit var id :String
     lateinit var telefono:String
     lateinit var direccionImagen :String
+    lateinit var correoUsuario:String
+    lateinit var tipo: String
+
 
     private fun crearRegistroAuto(){
         /**
@@ -62,7 +66,7 @@ class TaxiActivity : AppCompatActivity() {
          */
 
 
-        guardarUsuarioAFireBase(direccionImagen)
+        guardarUsuarioAFireBase()
 
     }
 
@@ -71,22 +75,23 @@ class TaxiActivity : AppCompatActivity() {
     /**
      * Guardar todos los datos de usuario en la Base de Datos de Firebase
      */
-    private fun guardarUsuarioAFireBase(imagenPerfil: String){
+    private fun guardarUsuarioAFireBase(){
 
         val marca= etMarca.text.toString()
         val modelo= etModelo.text.toString()
         val placa= etPlaca.text.toString()
         val Ntaxi = etNumeroTaxi.text.toString()
+        val ratingBar=3.5
 
         //val idUsuario = FirebaseAuth.getInstance().uid ?: ""
 
-        val referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("/infoTaxi/$id")
-        val taxi = Taxi(id, nombreUsuario,telefono, imagenPerfil,marca,modelo,placa,Ntaxi)
+        val referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$id")
+        val taxi = Taxi(id, nombreUsuario,correoUsuario,telefono,tipo.toInt() ,direccionImagen,marca,modelo,placa,Ntaxi,ratingBar.toFloat())
 
         referenciaBaseDatos.setValue(taxi)
             .addOnSuccessListener {
                 Toast.makeText(this, "Se ha guardado con exito el usuario en Storage", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this,MenuActivity::class.java)
+                val intent = Intent(this,MenuTaxiActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
@@ -96,21 +101,10 @@ class TaxiActivity : AppCompatActivity() {
 
     }
 
-    class Taxi(val idUsuario:String, val nombreUsuario: String, val telefono:String,val imagenPerfil: String,val marca:String,val modelo:String,val numeroPlaca:String,val numeroTaxi:String)
+    class Taxi(val idUsuario:String, val nombreUsuario: String, val correo:String,val telefono:String,val tipo:Int,val imagenPerfil: String,val marca:String,val modelo:String,val numeroPlaca:String,val numeroTaxi:String,val rating:Float)
 
 
     //Funcion que nos permite salir del activity si
-    override fun onBackPressed() {
-
-        AlertDialog.Builder(this)
-            .setMessage("Está seguro que desea salir?")
-            .setCancelable(false)
-            .setPositiveButton(
-                "Si"
-            ) { _, _ -> this@TaxiActivity.finish() }
-            .setNegativeButton("No", null)
-            .show()
-    }
 
     /*// Agregar un nuevo platillo (repetido)
     platillos.add(Platillo("Platillo 11", 300.00, 4.0, R.drawable.platillo01))

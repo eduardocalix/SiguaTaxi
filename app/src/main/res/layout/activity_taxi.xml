@@ -5,7 +5,7 @@
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
                                              android:id="@+id/layoutRegistro"
-                                             android:background="@drawable/dos">
+                                             android:background="@drawable/dos" android:layout_margin="8dp">
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -28,28 +28,30 @@
                 android:ems="10"
                 android:id="@+id/etMarca" android:hint="@string/marca"
                 android:layout_margin="10dp" android:textColorHint="@color/design_default_color_primary_dark"
-                android:importantForAutofill="no"/>
+                android:importantForAutofill="no" android:textColor="@color/design_default_color_primary_dark"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textFilter|text"
                 android:ems="10"
                 android:id="@+id/etModelo" android:hint="@string/modelo" android:layout_margin="10dp"
-                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no"/>
+                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no"
+                android:textColor="@color/design_default_color_primary_dark"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/etPlaca" android:inputType="textFilter|text" android:hint="@string/numeroP"
                 android:layout_margin="10dp" android:textColorHint="@color/design_default_color_primary_dark"
-                android:importantForAutofill="no"/>
+                android:importantForAutofill="no" android:textColor="@color/design_default_color_primary_dark"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/etNumeroTaxi" android:layout_margin="15dp" android:hint="@string/numeroT"
-                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no"/>
+                android:textColorHint="@color/design_default_color_primary_dark" android:importantForAutofill="no"
+                android:textColor="@color/design_default_color_primary_dark"/>
         <Button
                 android:text="@string/crear_cuenta"
                 android:layout_width="match_parent"

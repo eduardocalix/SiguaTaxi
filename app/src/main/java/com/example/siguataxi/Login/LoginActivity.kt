@@ -13,13 +13,19 @@ import android.os.Bundle
 import android.content.Intent
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 
 import android.widget.*
 
 import kotlinx.android.synthetic.main.activity_login.*
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_usuarios.*
+import com.example.siguataxi.Forma.Usuario
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
 
 
 //import sun.security.jgss.GSSUtil.login
@@ -40,7 +46,6 @@ class LoginActivity : AppCompatActivity() {
     private val contrasena:String="abc"
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -53,13 +58,15 @@ class LoginActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(correo, password)
                 .addOnCompleteListener {
                     if (!it.isSuccessful) return@addOnCompleteListener
-
-            val intent = Intent(this, MenuActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    val intent = Intent(this, MenuActivity::class.java)
+                   intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
 
                     startActivity(intent)
-            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-        }}
+                    Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+
+
+
+                }}
         /*
                // Volver a pantalla de registro
                lblVolverRegistro_login.setOnClickListener {
@@ -104,7 +111,6 @@ class LoginActivity : AppCompatActivity() {
         tvRegistroLogin.setOnClickListener {
             val intent = Intent(this, UsuariosActivity::class.java)
             startActivity(intent)
-            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
 
 
         }

@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.siguataxi.Forma.Usuario
 import com.example.siguataxi.Mensajes.NuevoMensajeActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -67,6 +68,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         }else{buscarUsuario()}
     }
+    private val tipo=0
+
     private fun buscarUsuario() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$uid")
@@ -75,14 +78,14 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onDataChange(p0: DataSnapshot) {
 
 
-                MenuTaxiActivity.usuarioActual = p0.getValue(Usuario::class.java)
+                //MenuTaxiActivity.usuarioActual = p0.getValue(Usuario::class.java)
                 val nombreUsuario = p0.getValue(Usuario::class.java)
                 if (nombreUsuario != null) {
 
-                    Log.d("UltimosMensajes", "Usuario Actual ${MenuTaxiActivity.usuarioActual?.imagenPerfil}")
+                  //  Log.d("UltimosMensajes", "Usuario Actual ${MenuTaxiActivity.usuarioActual?.imagenPerfil}")
                     tvNombreUsuario.text = nombreUsuario.nombreUsuario
-                    tvCorreoMenu.text=nombreUsuario.telefono
-
+                    tvCorreoMenu.text=nombreUsuario.correo
+                    tipo== nombreUsuario.tipo
                     Picasso.get().load(nombreUsuario.imagenPerfil).into(imageView)
 
                 }
@@ -91,6 +94,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onCancelled(p0: DatabaseError) {}
         })
     }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -131,7 +135,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_pedir -> {
                 val intent = Intent(this, NuevoMensajeActivity::class.java)
                 startActivity(intent)
-                this.onPause()
+
 
             }
             R.id.nav_mostrar -> {

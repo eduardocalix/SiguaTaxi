@@ -7,19 +7,22 @@ import android.support.v7.widget.DividerItemDecoration
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.siguataxi.Forma.Usuario
 import com.example.siguataxi.Forma.MensajeChatClase
+import com.example.siguataxi.Mensajes.ChatTaxiActivity
 import com.example.siguataxi.Mensajes.NuevoMensajeActivity
 import com.example.siguataxi.vistas.UltimosMensajesLista
+import com.example.siguataxi.vistas.UltimosMensajesTaxi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_contenedor_mensajes.*
+import kotlinx.android.synthetic.main.activity_chat_taxi.*
+
 import kotlinx.android.synthetic.main.activity_menu_taxi.*
-import kotlinx.android.synthetic.main.nav_header_menu.*
-import kotlinx.android.synthetic.main.nuevo_mensaje_lista_usuario.view.*
+
 
 class MenuTaxiActivity : AppCompatActivity() {
 
@@ -28,22 +31,23 @@ class MenuTaxiActivity : AppCompatActivity() {
         val TAG = "UltimosMensajes"
     }
 
-    val adaptador = GroupAdapter<ViewHolder>()
+    val adaptadorTaxi = GroupAdapter<ViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_taxi)
+        Toast.makeText(this, "Menú taxi", Toast.LENGTH_SHORT).show()
 
-        rv_ultimos_mensajes1.adapter = adaptador
-        rv_ultimos_mensajes1.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        rv_ultimos_mensajes_taxi.adapter = adaptadorTaxi
+        rv_ultimos_mensajes_taxi.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         // Seleccionar item con el adaptador
-        adaptador.setOnItemClickListener { item, view ->
+        adaptadorTaxi.setOnItemClickListener  {item,View ->
             Log.d(TAG, "123")
-            val intent = Intent(this, ChatActivity::class.java)
+            val intent = Intent(this, ChatTaxiActivity::class.java)
 
 
-            val lista = item as UltimosMensajesLista
+            val lista = item as UltimosMensajesTaxi
             intent.putExtra(NuevoMensajeActivity.USER_kEY, lista.chatAmigo)
             startActivity(intent)
         }
@@ -54,12 +58,12 @@ class MenuTaxiActivity : AppCompatActivity() {
         actualizarMensajes()
     }
 
-    val mapaUltimosMensajes = HashMap<String, MensajeChatClase>()
+    val mapaUltimosMensajesTaxiActivity = HashMap<String, MensajeChatClase>()
 
     private fun actualizarMensajes() {
         val adaptador = GroupAdapter<ViewHolder>()
         adaptador.clear()
-        mapaUltimosMensajes.values.forEach {
+        mapaUltimosMensajesTaxiActivity .values.forEach {
             adaptador.add(UltimosMensajesLista(it))
         }
     }
@@ -70,13 +74,13 @@ class MenuTaxiActivity : AppCompatActivity() {
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val mensajeChat = p0.getValue(MensajeChatClase::class.java) ?: return
-                mapaUltimosMensajes[p0.key!!] = mensajeChat
+                mapaUltimosMensajesTaxiActivity [p0.key!!] = mensajeChat
                 actualizarMensajes()
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
                 val chatMessage = p0.getValue(MensajeChatClase::class.java) ?: return
-                mapaUltimosMensajes[p0.key!!] = chatMessage
+                mapaUltimosMensajesTaxiActivity [p0.key!!] = chatMessage
                 actualizarMensajes()
             }
 
@@ -92,19 +96,8 @@ class MenuTaxiActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
-
-
-                    usuarioActual = p0.getValue(Usuario::class.java)
-                    val nombreUsuario = p0.getValue(Usuario::class.java)
-                    if (nombreUsuario != null) {
-
-                    Log.d("UltimosMensajes", "Usuario Actual ${usuarioActual?.imagenPerfil}")
-                        tvNombreUsuario.text = nombreUsuario.nombreUsuario
-                        tvCorreoMenu.text=nombreUsuario.telefono
-
-                    Picasso.get().load(nombreUsuario.imagenPerfil).into(imageView)
-
-                }
+                usuarioActual = p0.getValue(Usuario::class.java)
+                Log.d("UltimosMensajes", "Usuario Actual ${usuarioActual?.imagenPerfil}")
             }
 
             override fun onCancelled(p0: DatabaseError) {}
@@ -128,7 +121,7 @@ class MenuTaxiActivity : AppCompatActivity() {
             }
             R.id.menu_cerrarSesion -> {
                 FirebaseAuth.getInstance().signOut()
-                val intent = Intent(this, UsuariosActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
