@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.Uri
 
 import android.provider.MediaStore
-import android.util.Log
 
 import android.widget.Toast
 
@@ -151,6 +150,8 @@ lateinit var idInsersion :String
              */
             .addOnCompleteListener {
                 if (!it.isSuccessful){
+                    Toast.makeText(this, "Ocurrió un error", Toast.LENGTH_LONG).show()
+
                     return@addOnCompleteListener
                 }else {
 

@@ -12,19 +12,9 @@ import android.os.Bundle
 
 import android.content.Intent
 import android.support.v7.app.AlertDialog
-import android.text.TextUtils
-import android.util.Log
-import android.view.View
-
 import android.widget.*
-
 import kotlinx.android.synthetic.main.activity_login.*
 import android.widget.Toast
-import com.example.siguataxi.Forma.Usuario
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 
 
@@ -37,13 +27,13 @@ import com.google.firebase.database.ValueEventListener
 
 class LoginActivity : AppCompatActivity() {
 //"gladysberenicejimenez@gmail.com"
-
+/*
     private lateinit var progressBar: ProgressBar
     private lateinit var auth:FirebaseAuth
 
 
     private val usuarioEmail:String = "eduardocalix11xtra@gmail.com"
-    private val contrasena:String="abc"
+    private val contrasena:String="abc"*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,13 +41,20 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         //Accion al hacer click en el boton Iniciar Sesión
         btnIniciar.setOnClickListener {
+
             val correo = etUsuario.text.toString()
             val password = etContrasenaLogin.text.toString()
-
+            if( password.isEmpty()&&correo.isEmpty()){
+                Toast.makeText(this, "Contraseña o usuario están en blanco", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             // Iniciando Login de usuario ya registrado
             FirebaseAuth.getInstance().signInWithEmailAndPassword(correo, password)
                 .addOnCompleteListener {
-                    if (!it.isSuccessful) return@addOnCompleteListener
+                    if (!it.isSuccessful){
+                        Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_LONG).show()
+
+                    return@addOnCompleteListener}
                     val intent = Intent(this, MenuActivity::class.java)
                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
 

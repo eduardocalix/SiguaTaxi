@@ -1,18 +1,12 @@
 package com.example.siguataxi
 
-import android.content.Context
-import android.content.Intent
+
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.util.Log
-import android.view.GestureDetector
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.RatingBar
-import android.widget.TextView
 import android.widget.Toast
-
 import com.example.siguataxi.Forma.MensajeChatClase
 import com.example.siguataxi.Forma.Usuario
 import com.example.siguataxi.Mensajes.NuevoMensajeActivity
@@ -27,20 +21,14 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.actualizar_puntuacion.*
 import kotlinx.android.synthetic.main.actualizar_puntuacion.view.*
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.util.Calendar.getInstance
 import java.util.*
 
 class ChatActivity : AppCompatActivity() {
 
 
 
-    companion object {
-        val TAG = "RegistroChat"
-    }
 
     /**
      * Estableciendo Adaptador
@@ -75,8 +63,12 @@ class ChatActivity : AppCompatActivity() {
 
         btnEnviar_registro_chat.setOnClickListener {
             val date = getCurrentDateTime()
-            realizarEnvioMensajes(date)
+            if(txtEscribirMensaje_registro_chat.text.isEmpty()){
+                Toast.makeText(this, "No puedes enviar mensajes en blanco!!!", Toast.LENGTH_SHORT).show()
 
+            }else {
+                realizarEnvioMensajes(date)
+            }
         }
     }
      fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
@@ -121,6 +113,7 @@ class ChatActivity : AppCompatActivity() {
     private fun realizarEnvioMensajes(date:Date) {
         // Como enviar mensajes a Firebase...
         val texto = txtEscribirMensaje_registro_chat.text.toString()
+
         val dateInString = date.toString("HH:mm:ss")
         val deId = FirebaseAuth.getInstance().uid
         val paraUsuario = intent.getParcelableExtra<Usuario>(NuevoMensajeActivity.USER_kEY)
@@ -172,7 +165,7 @@ class ChatActivity : AppCompatActivity() {
         view.rbPuntuacionActualizar?.rating=usuario.rating.toFloat()
 
         Picasso.get()?.load(usuario?.imagenPerfil)?.into(view.img_actualizar)
-        var puntuacion=view.findViewById<RatingBar>(R.id.rbPuntuacionActualizar)
+        val puntuacion=view.findViewById<RatingBar>(R.id.rbPuntuacionActualizar)
         mostrar.setView(view)
         mostrar.setPositiveButton( "Actualizar"){p0,p1->
             val ref= FirebaseDatabase.getInstance().getReference("/infoUsuarios/")

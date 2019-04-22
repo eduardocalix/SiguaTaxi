@@ -72,6 +72,9 @@
     <string name="usuarioCreado">Usuario creado correctamente</string>
     <string name="nuevo_mensaje">Nuevo Mensaje</string>
     <string name="escribir">Escribir un mensaje..</string>
-  <string name="calificar">Calificar Usuario</string>
+    <string name="calificar">Calificar Usuario</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Tipo</string>
 
 </resources>

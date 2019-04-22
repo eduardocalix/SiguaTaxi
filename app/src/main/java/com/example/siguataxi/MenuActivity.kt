@@ -70,7 +70,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }else{buscarUsuario()}
     }
     private val tipo=0
-
+    lateinit var nombreCuenta:String
     private fun buscarUsuario() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$uid")
@@ -85,6 +85,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                   //  Log.d("UltimosMensajes", "Usuario Actual ${MenuTaxiActivity.usuarioActual?.imagenPerfil}")
                     tvNombreUsuario.text = nombreUsuario.nombreUsuario
+                    nombreCuenta=nombreUsuario.nombreUsuario
                     tvCorreoMenu.text=nombreUsuario.correo
                     tipo== nombreUsuario.tipo
                     Picasso.get().load(nombreUsuario.imagenPerfil).into(imageView)
@@ -116,7 +117,9 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.configuracion ->{
-                Snackbar.make(mNavigationView,"En este momento no puedes enviar un mensaje", Snackbar.LENGTH_LONG)
+                Snackbar.make(mNavigationView,"No se puede configurar en este momento!!" +
+                        "" +
+                        "", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
             return true}
 
@@ -134,8 +137,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_inicio -> {
 
-//                val ft = mFragmentManager.beginTransaction()
-//                ft.replace(R.id.MapaPrincipal, MapaTaxiActivity()).commit()
+          val ft = mFragmentManager.beginTransaction()
+               ft.replace(R.id.MapaPrincipal, BlankFragment()).commit()
             }
             R.id.nav_pedir -> {
                /* val intent = Intent(this, NuevoMensajeActivity::class.java)
