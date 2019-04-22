@@ -46,8 +46,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/ultimos"
@@ -56,5 +54,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/img_ultimos_mensajes"
-            app:layout_constraintTop_toBottomOf="@+id/usuario_textview_ultimos_mensajes"/>
+            app:layout_constraintTop_toBottomOf="@+id/usuario_textview_ultimos_mensajes"
+            android:textColor="@color/design_default_color_primary_dark"/>
 </android.support.constraint.ConstraintLayout>

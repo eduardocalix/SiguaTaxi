@@ -41,11 +41,12 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         verificarUsuario()
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "En este momento no puedes enviar un mensaje", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        fab.setOnClickListener {
+            val ft = mFragmentManager.beginTransaction()
+            ft.replace(R.id.MapaPrincipal,ContenedorMensajesActivity()).commit()
         }
-
+ /*       configuracion.setOnClickListener{
+        }*/
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -114,7 +115,11 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
+            R.id.configuracion ->{
+                Snackbar.make(mNavigationView,"En este momento no puedes enviar un mensaje", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+            return true}
+
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -133,14 +138,17 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //                ft.replace(R.id.MapaPrincipal, MapaTaxiActivity()).commit()
             }
             R.id.nav_pedir -> {
-                val intent = Intent(this, NuevoMensajeActivity::class.java)
-                startActivity(intent)
-
+               /* val intent = Intent(this, NuevoMensajeActivity::class.java)
+                startActivity(intent)*/
+                val ft = mFragmentManager.beginTransaction()
+                ft.replace(R.id.MapaPrincipal,NuevoMensajeActivity()).commit()
 
             }
             R.id.nav_mostrar -> {
-                val intent = Intent(this, ContenedorMensajesActivity::class.java)
-                startActivity(intent)
+                val ft = mFragmentManager.beginTransaction()
+                ft.replace(R.id.MapaPrincipal,ContenedorMensajesActivity()).commit()
+                /*val intent = Intent(this, ContenedorMensajesActivity::class.java)
+                startActivity(intent)*/
             }
             R.id.nav_cerrar -> {
                 FirebaseAuth.getInstance().signOut()

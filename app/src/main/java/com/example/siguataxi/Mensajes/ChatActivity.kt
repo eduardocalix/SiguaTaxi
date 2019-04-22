@@ -1,6 +1,7 @@
 package com.example.siguataxi
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -48,15 +49,25 @@ class ChatActivity : AppCompatActivity() {
      */
     val adaptador = GroupAdapter<ViewHolder>()
     var paraUsuario: Usuario? = null
+    lateinit var tipo: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+        //val objetoIntent: Intent =intent
+       // tipo=objetoIntent.getStringExtra("tipoU")
 
         rvRegistroChat.adapter = adaptador
         paraUsuario = intent.getParcelableExtra<Usuario>(NuevoMensajeActivity.USER_kEY)
-        supportActionBar?.title = paraUsuario?.nombreUsuario
+        //supportActionBar?.title = paraUsuario?.nombreUsuario
         tvUser.text = paraUsuario?.nombreUsuario
+//        if(tipo.toInt()==1){
+//         val b:View= findViewById(R.id.btnCalificar)
+//            b.setVisibility(View.GONE)
+//        }else{
+//            val b:View= findViewById(R.id.btnCalificar)
+//            b.setVisibility(View.VISIBLE)
+//        }
         listaMensajes()
         btnCalificar.setOnClickListener {
             MostrarActualizar()

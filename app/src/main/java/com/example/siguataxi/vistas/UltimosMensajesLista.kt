@@ -1,5 +1,6 @@
 package com.example.siguataxi.vistas
 
+import android.util.Log
 import com.example.siguataxi.Forma.MensajeChatClase
 import com.example.siguataxi.R
 import com.example.siguataxi.Forma.Usuario
@@ -19,6 +20,7 @@ class UltimosMensajesLista( val mensajesChat: MensajeChatClase): Item<ViewHolder
   override fun bind(viewHolder: ViewHolder, position: Int) {
     viewHolder.itemView.mensaje_textview_ultimos_mensajes.text = mensajesChat.texto
     viewHolder.itemView.tvHorapara2.text=mensajesChat.tiempo
+    Log.d("UltimosMensajes_lista", "lista")
 
 
     val chatAmigoId: String
@@ -44,6 +46,8 @@ class UltimosMensajesLista( val mensajesChat: MensajeChatClase): Item<ViewHolder
   }
 
   override fun getLayout(): Int {
+    Log.d("UltimosMensajes_lista", "Llenar mensaje lista")
     return R.layout.ultimos_mensajes_lista
+
   }
 }

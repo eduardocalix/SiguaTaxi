@@ -28,13 +28,14 @@
                 android:id="@+id/img_nuevo_mensaje"
                 android:layout_width="100dp"
                 android:layout_height="107dp"
-                app:civ_border_color="@color/colorPrimaryDark"
+                app:civ_border_color="@color/common_google_signin_btn_text_dark_focused"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
-                app:civ_border_width="2dp"
+                app:civ_border_width="3dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/btn_dialog" android:layout_marginEnd="10dp"
+                app:srcCompat="@android:drawable/btn_star_big_on"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"/>
         <LinearLayout
                 android:orientation="vertical"
@@ -46,7 +47,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:text="@string/nombres"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/design_default_color_primary_dark"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/img_nuevo_mensaje"
@@ -59,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/tvTelefono"
                     android:textSize="14sp" android:layout_marginEnd="16dp" android:layout_marginStart="16dp"
-                    android:layout_marginTop="10dp" android:textColor="@color/colorPrimary"/>
+                    android:layout_marginTop="10dp" android:textColor="@color/design_default_color_primary_dark"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -70,13 +71,13 @@
                         android:layout_width="92dp"
                         android:layout_height="wrap_content" android:id="@+id/tvNumeroTaxi"
                         android:textSize="14sp" android:layout_marginEnd="16dp" android:layout_marginStart="16dp"
-                        android:layout_marginTop="5dp" android:textColor="@color/colorPrimary"/>
+                        android:layout_marginTop="5dp" android:textColor="@color/design_default_color_primary_dark"/>
                 <TextView
                         android:text="@string/numeroP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/tvNumeroPlaca"
                         android:textSize="14sp" android:layout_marginEnd="16dp" android:layout_marginStart="16dp"
-                        android:layout_marginTop="5dp" android:textColor="@color/colorPrimary"
+                        android:layout_marginTop="5dp" android:textColor="@color/design_default_color_primary_dark"
                         android:layout_marginBottom="5dp"/>
             </LinearLayout>
         </LinearLayout>

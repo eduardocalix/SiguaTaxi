@@ -1,14 +1,14 @@
 package com.example.siguataxi
 
+
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
-
+import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.*
 import com.example.siguataxi.ChatActivity
 import com.example.siguataxi.Forma.MensajeChatClase
 import com.example.siguataxi.Forma.Usuario
@@ -25,7 +25,8 @@ import kotlinx.android.synthetic.main.activity_contenedor_mensajes.*
 import kotlinx.android.synthetic.main.nuevo_mensaje_lista_usuario.*
 
 
-class ContenedorMensajesActivity : AppCompatActivity() {
+class ContenedorMensajesActivity : Fragment() {
+
 
     companion object {
         var usuarioActual: Usuario? = null
@@ -33,19 +34,17 @@ class ContenedorMensajesActivity : AppCompatActivity() {
 
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contenedor_mensajes)
 
 
-        recyclerview_ultimo_mensaje.adapter = adaptador
-        recyclerview_ultimo_mensaje.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
 
         // Seleccionar item con el adaptador
         adaptador.setOnItemClickListener { item, view ->
             Log.d(TAG, "123")
             val intent = Intent(view.context, ChatActivity::class.java)
+            //intent.putExtra("tipoU", usuarioActual?.tipo)
 
             val lista = item as UltimosMensajesLista
             intent.putExtra(NuevoMensajeActivity.USER_kEY, lista.chatAmigo)
@@ -55,6 +54,9 @@ class ContenedorMensajesActivity : AppCompatActivity() {
         listaUltimosMensajes()
         buscarUsuario()
         verificarInicioSesionUsuario()
+        Log.d("UltimosMensajes", "Llenar mensaje")
+
+        return inflater.inflate(R.layout.activity_contenedor_mensajes,container,false)
 
     }
     val adaptador = GroupAdapter<ViewHolder>()
@@ -65,6 +67,10 @@ class ContenedorMensajesActivity : AppCompatActivity() {
         adaptador.clear()
         mapaUltimosMensajes.values.forEach {
             adaptador.add(UltimosMensajesLista(it))
+            Log.d("UltimosMensajes", "Actualizar mensaje")
+
+            recyclerview_ultimo_mensaje?.adapter = adaptador
+            recyclerview_ultimo_mensaje?.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
         }
     }
 
@@ -76,6 +82,8 @@ class ContenedorMensajesActivity : AppCompatActivity() {
                 val mensajeChat = p0.getValue(MensajeChatClase::class.java) ?: return
                 mapaUltimosMensajes[p0.key!!] = mensajeChat
                 actualizarMensajes()
+                Log.d("UltimosMensajes", "Lista mensaje")
+
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
@@ -106,7 +114,7 @@ class ContenedorMensajesActivity : AppCompatActivity() {
     private fun verificarInicioSesionUsuario() {
         val uid = FirebaseAuth.getInstance().uid
         if (uid == null) {
-            val intent = Intent(this, UsuariosActivity::class.java)
+            val intent = Intent(this.context, UsuariosActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
