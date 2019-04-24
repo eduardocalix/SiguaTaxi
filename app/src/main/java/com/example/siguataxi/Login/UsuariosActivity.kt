@@ -230,7 +230,7 @@ lateinit var idInsersion :String
                // Toast.makeText(this, "Se ha guardado con exito el usuario en Storage", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this,MenuActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
+                //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)}
 
             .addOnFailureListener {

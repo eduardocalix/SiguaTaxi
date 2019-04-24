@@ -15,7 +15,8 @@ import android.support.v7.app.AlertDialog
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_login.*
 import android.widget.Toast
-
+import com.example.siguataxi.Forma.Credenciales
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable
 
 
 //import sun.security.jgss.GSSUtil.login
@@ -31,20 +32,24 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var auth:FirebaseAuth
 
-
-    private val usuarioEmail:String = "eduardocalix11xtra@gmail.com"
-    private val contrasena:String="abc"*/
+*/
+    lateinit var usuarioEmail:String
+    lateinit var contrasena:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        google_btn.setOnClickListener{
+            Toast.makeText(this, "En este momento no se puede usar facebook", Toast.LENGTH_LONG).show()
+
+        }
         //Accion al hacer click en el boton Iniciar Sesión
         btnIniciar.setOnClickListener {
 
             val correo = etUsuario.text.toString()
             val password = etContrasenaLogin.text.toString()
-            if( password.isEmpty()&&correo.isEmpty()){
+            if( password.isEmpty()||correo.isEmpty()){
                 Toast.makeText(this, "Contraseña o usuario están en blanco", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
@@ -55,6 +60,10 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_LONG).show()
 
                     return@addOnCompleteListener}
+
+                 /* var UsuarioCredencial = Credenciales(correo,password)
+                        usuarioEmail=UsuarioCredencial.correoCredencial
+                        contrasena=UsuarioCredencial.contrasenaCredecial*/
                     val intent = Intent(this, MenuActivity::class.java)
                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
 
@@ -64,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
 
 
                 }}
+
         /*
                // Volver a pantalla de registro
                lblVolverRegistro_login.setOnClickListener {
@@ -113,7 +123,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
 /*
     private fun UsuarioInicio(){
         val usuario:String=etUsuario.text.toString()

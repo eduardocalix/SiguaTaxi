@@ -155,7 +155,7 @@ class ChatActivity : AppCompatActivity() {
 
     fun MostrarActualizar(){
         val usuario = intent.getParcelableExtra<Usuario>(NuevoMensajeActivity.USER_kEY)
-        Toast.makeText(this, "Usuario Modificado", Toast.LENGTH_SHORT).show()
+
 
         val mostrar= AlertDialog.Builder(this)
         val inflater = LayoutInflater.from(this)
@@ -169,7 +169,7 @@ class ChatActivity : AppCompatActivity() {
         mostrar.setView(view)
         mostrar.setPositiveButton( "Actualizar"){p0,p1->
             val ref= FirebaseDatabase.getInstance().getReference("/infoUsuarios/")
-            val usuarioActual =Usuario(usuario.idUsuario,usuario.nombreUsuario,usuario.correo,usuario.telefono,1,usuario.imagenPerfil,usuario.marca,usuario.modelo,usuario.numeroPlaca,usuario.numeroTaxi,puntuacion.rating.toInt())
+            val usuarioActual =Usuario(usuario.idUsuario,usuario.nombreUsuario,usuario.correo,usuario.telefono,usuario.tipo,usuario.imagenPerfil,usuario.marca,usuario.modelo,usuario.numeroPlaca,usuario.numeroTaxi,puntuacion.rating.toInt())
             ref.child(usuario.idUsuario).setValue(usuarioActual)
             Toast.makeText(this, "Usuario Modificado", Toast.LENGTH_SHORT).show()
 

@@ -28,7 +28,7 @@
                 android:id="@+id/img_nuevo_mensaje"
                 android:layout_width="100dp"
                 android:layout_height="107dp"
-                app:civ_border_color="@color/common_google_signin_btn_text_dark_focused"
+                app:civ_border_color="@color/colorPrimaryDark"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 app:civ_border_width="3dp"

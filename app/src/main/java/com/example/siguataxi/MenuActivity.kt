@@ -4,6 +4,7 @@ package com.example.siguataxi
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -18,6 +19,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.siguataxi.Forma.Credenciales
 import com.example.siguataxi.Forma.Usuario
 import com.example.siguataxi.Mensajes.NuevoMensajeActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -43,9 +45,9 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         fab.setOnClickListener {
             val ft = mFragmentManager.beginTransaction()
-            ft.replace(R.id.MapaPrincipal,ContenedorMensajesActivity()).commit()
+            ft.replace(R.id.MapaPrincipal, ContenedorMensajesActivity()).commit()
         }
- /*       configuracion.setOnClickListener{
+        /*       configuracion.setOnClickListener{
         }*/
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -61,20 +63,24 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mFragmentTransaction = mFragmentManager.beginTransaction()
 
     }
-    private fun verificarUsuario(){
+
+    private fun verificarUsuario() {
         val idUsuario = FirebaseAuth.getInstance().uid
-        if (idUsuario == null){
-            val intent = Intent (this, UsuariosActivity::class.java)
+        if (idUsuario == null) {
+            val intent = Intent(this, UsuariosActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or (Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-        }else{buscarUsuario()}
+        } else {
+            buscarUsuario()
+        }
     }
-    private val tipo=0
-    lateinit var nombreCuenta:String
+
+    private val tipo = 0
+    lateinit var nombreCuenta: String
     private fun buscarUsuario() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/infoUsuarios/$uid")
-        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
 
@@ -83,12 +89,14 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val nombreUsuario = p0.getValue(Usuario::class.java)
                 if (nombreUsuario != null) {
 
-                  //  Log.d("UltimosMensajes", "Usuario Actual ${MenuTaxiActivity.usuarioActual?.imagenPerfil}")
+                    //  Log.d("UltimosMensajes", "Usuario Actual ${MenuTaxiActivity.usuarioActual?.imagenPerfil}")
                     tvNombreUsuario.text = nombreUsuario.nombreUsuario
-                    nombreCuenta=nombreUsuario.nombreUsuario
-                    tvCorreoMenu.text=nombreUsuario.correo
-                    tipo== nombreUsuario.tipo
+                    nombreCuenta = nombreUsuario.nombreUsuario
+                    tvCorreoMenu.text = nombreUsuario.correo
+                    tipo == nombreUsuario.tipo
                     Picasso.get().load(nombreUsuario.imagenPerfil).into(imageView)
+                    //guardarValor("user", nombreUsuario.correo)
+                    //guardarValor("password", < clave de acceso >);
 
                 }
             }
@@ -116,12 +124,15 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.configuracion ->{
-                Snackbar.make(mNavigationView,"No se puede configurar en este momento!!" +
-                        "" +
-                        "", Snackbar.LENGTH_LONG)
+            R.id.configuracion -> {
+                Snackbar.make(
+                    mNavigationView, "No se puede configurar en este momento!!" +
+                            "" +
+                            "", Snackbar.LENGTH_LONG
+                )
                     .setAction("Action", null).show()
-            return true}
+                return true
+            }
 
             else -> return super.onOptionsItemSelected(item)
         }
@@ -130,42 +141,44 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var mDrawerLayout: DrawerLayout
     lateinit var mNavigationView: NavigationView
     lateinit var mFragmentManager: FragmentManager
-    lateinit var mFragmentTransaction:FragmentTransaction
+    lateinit var mFragmentTransaction: FragmentTransaction
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_inicio -> {
 
-          val ft = mFragmentManager.beginTransaction()
-               ft.replace(R.id.MapaPrincipal, BlankFragment()).commit()
+                val ft = mFragmentManager.beginTransaction()
+                ft.replace(R.id.MapaPrincipal, BlankFragment()).commit()
             }
             R.id.nav_pedir -> {
-               /* val intent = Intent(this, NuevoMensajeActivity::class.java)
+                /* val intent = Intent(this, NuevoMensajeActivity::class.java)
                 startActivity(intent)*/
                 val ft = mFragmentManager.beginTransaction()
-                ft.replace(R.id.MapaPrincipal,NuevoMensajeActivity()).commit()
+                ft.replace(R.id.MapaPrincipal, NuevoMensajeActivity()).commit()
 
             }
             R.id.nav_mostrar -> {
                 val ft = mFragmentManager.beginTransaction()
-                ft.replace(R.id.MapaPrincipal,ContenedorMensajesActivity()).commit()
+                ft.replace(R.id.MapaPrincipal, ContenedorMensajesActivity()).commit()
                 /*val intent = Intent(this, ContenedorMensajesActivity::class.java)
                 startActivity(intent)*/
             }
             R.id.nav_cerrar -> {
+                //Para cerrar sesion
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
+
                 finish()
             }
             R.id.nav_horarios -> {
                 val ft = mFragmentManager.beginTransaction()
-                ft.replace(R.id.MapaPrincipal,HorariosActivity()).commit()
+                ft.replace(R.id.MapaPrincipal, HorariosActivity()).commit()
             }
             R.id.nav_nosotros -> {
-            val ft = mFragmentManager.beginTransaction()
-                ft.replace(R.id.MapaPrincipal,NosotrosActivity()).commit()
+                val ft = mFragmentManager.beginTransaction()
+                ft.replace(R.id.MapaPrincipal, NosotrosActivity()).commit()
 
             }
         }
@@ -173,6 +186,11 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+
+
+
+
 
     override fun onStart() {
         super.onStart()
