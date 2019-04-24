@@ -10,6 +10,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import android.util.Log
+import com.example.siguataxi.Forma.Credenciales
+import com.google.firebase.auth.FirebaseAuth
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -45,9 +47,31 @@ class MainActivity : AppCompatActivity() {
                         dummy = dummy+5
                         Thread.sleep(200)
                         if (dummy == 100){
+/*
+                            val credencial=Credenciales()::class.java
+                            val usuarioLogin=credencial.correoCredencial
+                            val contrasena=credencial.contrasenaCredecial
+                            if(usuarioLogin.isEmpty() &&contrasena.isEmpty()){*/
                             val intent:Intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
-                            finish()
+                            finish()/*}else{
+                                FirebaseAuth.getInstance().signInWithEmailAndPassword(usuarioLogin,contrasena)
+                                    .addOnCompleteListener {
+                                        if (!it.isSuccessful){
+                                            Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_LONG).show()
+
+                                            return@addOnCompleteListener}
+
+                                        val intent = Intent(this, MenuActivity::class.java)
+                                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                                        startActivity(intent)
+                                        Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+
+
+
+                                    }
+                            }*/
 
                         }
                     } catch (e: InterruptedException) {

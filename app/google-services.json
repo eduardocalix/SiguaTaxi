@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1002093152698",
+    "firebase_url": "https://taximapa-233904.firebaseio.com",
+    "project_id": "taximapa-233904",
+    "storage_bucket": "taximapa-233904.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002093152698:android:36f5df3c2a98a6fe",
+        "android_client_info": {
+          "package_name": "com.example.siguataxi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002093152698-kfhglaf5vv5nqusc8u3ffr2bju2p2gd0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.siguataxi",
+            "certificate_hash": "c68b7d4dbb9870de548b1a72c3d405e1ee84ae50"
+          }
+        },
+        {
+          "client_id": "1002093152698-chmu0b9l4q3q16oaflchn3ng5j5ugrmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfEVzZ0Y9YLtjipXkAv3NTY0CRv_XKzbk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002093152698-chmu0b9l4q3q16oaflchn3ng5j5ugrmb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
